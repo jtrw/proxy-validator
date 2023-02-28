@@ -1,0 +1,19 @@
+{
+    "name": "jtrw/proxy-validator",
+    "description": "Lib for check proxy",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nil Borodulia",
+            "email": "brdnlsrg@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Jtrw\\ProxyValidator\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}

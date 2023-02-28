@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Common\Application\Proxy;
+namespace Jtrw\ProxyValidator;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Jtrw\ProxyValidator\Exception\ProxyParamException;
 
 class ProxyValidator
 {

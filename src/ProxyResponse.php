@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Common\Application\Proxy;
+namespace Jtrw\ProxyValidator;
 
 class ProxyResponse
 {
