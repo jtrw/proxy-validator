@@ -9,6 +9,11 @@
             "email": "brdnlsrg@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Jtrw\\ProxyValidator\\": "src"
+        }
+    },
     "minimum-stability": "dev",
     "require": {}
 }
