@@ -21,13 +21,13 @@ class ProxyValidator
     private const PASS_INDEX = 3;
     private const TYPE_INDEX = 4;
     
-    private const KEY_PROXY_STR   = "proxy_name";
-    private const KEY_MESSAGE     = "message";
-    private const KEY_STATUS_CODE = "status_code";
+    public const KEY_PROXY_STR   = "proxy_name";
+    public const KEY_MESSAGE     = "message";
+    public const KEY_STATUS_CODE = "status_code";
     
-    private const OPTIONS_KEY_TIMEOUT         = "timeout";
-    private const OPTIONS_CONNECT_KEY_TIMEOUT = "connect_timeout";
-    private const OPTIONS_KEY_TEST_HOST = "host";
+    public const OPTIONS_KEY_TIMEOUT         = "timeout";
+    public const OPTIONS_CONNECT_KEY_TIMEOUT = "connect_timeout";
+    public const OPTIONS_KEY_TEST_HOST = "host";
     
     private const TIMEOUT_DEFAULT_VALUE         = 3;
     private const CONNECT_TIMEOUT_DEFAULT_VALUE = 3;
