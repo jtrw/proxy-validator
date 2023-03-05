@@ -9,17 +9,9 @@ use Jtrw\ProxyValidator\Exception\ProxyParamException;
 
 class ProxyValidator
 {
-    private const SEPARATOR = ":";
-    private const MASK = "";
     private const DEFAULT_TEST_HOST = "https://google.com";
     
     private const SUCCESS_STATUS_CODE = 200;
-    
-    private const HOST_INDEX = 0;
-    private const PORT_INDEX = 1;
-    private const LOGIN_INDEX = 2;
-    private const PASS_INDEX = 3;
-    private const TYPE_INDEX = 4;
     
     public const KEY_PROXY_STR   = "proxy_name";
     public const KEY_MESSAGE     = "message";
@@ -66,7 +58,8 @@ class ProxyValidator
     {
         $errors = [];
         try {
-            $proxyDto = $this->getProxyDto($proxy);
+            $formatter = new ProxyFormatter($proxy);
+            $proxyDto = $formatter->format();
         } catch (ProxyParamException $exp) {
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_MESSAGE] = $exp->getMessage();
@@ -115,18 +108,5 @@ class ProxyValidator
         if (array_key_exists($key, $this->options)) {
             return $this->options[$key];
         }
-    }
-    
-    private function getProxyDto(string $proxy): ProxyDto
-    {
-        $proxyData = explode(static::SEPARATOR, $proxy);
-    
-        $host = $proxyData[self::HOST_INDEX] ?? throw new ProxyParamException("Host Not Found");
-        $port = $proxyData[self::PORT_INDEX] ?? throw new ProxyParamException("Port Not Found");
-        $login = $proxyData[self::LOGIN_INDEX] ?? throw new ProxyParamException("Login Not Found");
-        $pass = $proxyData[self::PASS_INDEX] ?? throw new ProxyParamException("Pass Not Found");
-        $type = $proxyData[self::TYPE_INDEX] ?? throw new ProxyParamException("Type Not Found");
-        
-        return new ProxyDto($host, $port, $login, $pass, $type);
     }
 }
