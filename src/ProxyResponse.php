@@ -5,12 +5,12 @@ namespace Jtrw\ProxyValidator;
 class ProxyResponse
 {
     private bool $isValid;
-    private array $errors;
+    private ErrorDto $errors;
     
     public function __construct(bool $isValid = false, array $errors = [])
     {
         $this->isValid = $isValid;
-        $this->errors = $errors;
+        $this->errors = ErrorDto::fromArray($errors);
     }
     
     public function isValid(): bool
@@ -18,7 +18,7 @@ class ProxyResponse
         return $this->isValid;
     }
     
-    public function getErrors(): array
+    public function getErrors(): ErrorDto
     {
         return $this->errors;
     }
