@@ -7,10 +7,10 @@ class ProxyResponse
     private bool $isValid;
     private ?ErrorDto $errors = null;
     
-    public function __construct(bool $isValid = false, array $errors = [])
+    public function __construct(bool $isValid = false, ErrorDto $errorDto = null)
     {
         $this->isValid = $isValid;
-        $this->errors = $errors ? ErrorDto::fromArray($errors) : null;
+        $this->errors = $errorDto;
     }
     
     public function isValid(): bool

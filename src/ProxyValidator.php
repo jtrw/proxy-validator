@@ -63,7 +63,7 @@ class ProxyValidator
         } catch (ProxyParamException $exp) {
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_MESSAGE] = $exp->getMessage();
-            return new ProxyResponse(false, $errors);
+            return new ProxyResponse(false, ErrorDto::fromArray($errors));
         }
         
         $proxyStr = sprintf(
@@ -85,11 +85,11 @@ class ProxyValidator
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_MESSAGE] = $exp->getMessage();
             $errors[static::KEY_STATUS_CODE] = $exp->getResponse()->getStatusCode();
-            return new ProxyResponse(false, $errors);
+            return new ProxyResponse(false, ErrorDto::fromArray($errors));
         } catch (GuzzleException $exp) {
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_MESSAGE] = $exp->getMessage();
-            return new ProxyResponse(false, $errors);
+            return new ProxyResponse(false, ErrorDto::fromArray($errors));
         }
         
         $statusCode = $httpResponse->getStatusCode();
@@ -97,7 +97,7 @@ class ProxyValidator
         if ($httpResponse->getStatusCode() !== static::SUCCESS_STATUS_CODE) {
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_STATUS_CODE] = $statusCode;
-            return new ProxyResponse(false, $errors);
+            return new ProxyResponse(false, ErrorDto::fromArray($errors));
         }
     
         return new ProxyResponse(true);
