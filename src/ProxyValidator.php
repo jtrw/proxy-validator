@@ -9,49 +9,25 @@ use Jtrw\ProxyValidator\Exception\ProxyParamException;
 
 class ProxyValidator
 {
-    private const DEFAULT_TEST_HOST = "https://google.com";
-    
     private const SUCCESS_STATUS_CODE = 200;
     
     public const KEY_PROXY_STR   = "proxy_name";
     public const KEY_MESSAGE     = "message";
     public const KEY_STATUS_CODE = "status_code";
     
-    public const OPTIONS_KEY_TIMEOUT         = "timeout";
-    public const OPTIONS_CONNECT_KEY_TIMEOUT = "connect_timeout";
-    public const OPTIONS_KEY_TEST_HOST = "host";
-    
-    private const TIMEOUT_DEFAULT_VALUE         = 3;
-    private const CONNECT_TIMEOUT_DEFAULT_VALUE = 3;
     
     private ClientInterface $httpClient;
-    private array $options = [];
+    private ?ProxyOptions $options;
     
-    public function __construct(ClientInterface $client, array $options = [])
+    public function __construct(ClientInterface $client, ProxyOptions $options = null)
     {
         $this->httpClient = $client;
         $this->setOptions($options);
     }
     
-    private function setOptions(array $options = [])
+    private function setOptions(ProxyOptions $options = null)
     {
-        $this->options = $options;
-        $this->setDefaultOptions();
-    }
-    
-    private function setDefaultOptions()
-    {
-        if (!isset($this->options[static::OPTIONS_KEY_TIMEOUT])) {
-            $this->options[static::OPTIONS_KEY_TIMEOUT] = static::TIMEOUT_DEFAULT_VALUE;
-        }
-    
-        if (!isset($this->options[static::OPTIONS_CONNECT_KEY_TIMEOUT])) {
-            $this->options[static::OPTIONS_CONNECT_KEY_TIMEOUT] = static::CONNECT_TIMEOUT_DEFAULT_VALUE;
-        }
-        
-        if (!isset($this->options[static::OPTIONS_KEY_TEST_HOST])) {
-            $this->options[static::OPTIONS_KEY_TEST_HOST] = static::DEFAULT_TEST_HOST;
-        }
+        $this->options = new ProxyOptions();
     }
     
     public function validate(string $proxy): ProxyResponse
@@ -76,10 +52,10 @@ class ProxyValidator
         );
         
         try {
-            $httpResponse = $this->httpClient->request("GET", $this->getOption(static::OPTIONS_KEY_TEST_HOST), [
+            $httpResponse = $this->httpClient->request("GET", $this->options->getOption(ProxyOptions::OPTIONS_KEY_TEST_HOST), [
                 "proxy" => $proxyStr,
-                'timeout' => $this->getOption(static::OPTIONS_KEY_TIMEOUT), // Response timeout
-                'connect_timeout' => $this->getOption(static::OPTIONS_CONNECT_KEY_TIMEOUT), // Connection timeout
+                'timeout' => $this->options->getOption(ProxyOptions::OPTIONS_KEY_TIMEOUT), // Response timeout
+                'connect_timeout' => $this->options->getOption(ProxyOptions::OPTIONS_CONNECT_KEY_TIMEOUT), // Connection timeout
             ]);
         } catch (ClientException $exp) {
             $errors[static::KEY_PROXY_STR] = $proxy;
@@ -101,12 +77,5 @@ class ProxyValidator
         }
     
         return new ProxyResponse(true);
-    }
-    
-    private function getOption(string $key)
-    {
-        if (array_key_exists($key, $this->options)) {
-            return $this->options[$key];
-        }
     }
 }
