@@ -28,7 +28,7 @@ class ProxyValidator
     private function setOptions(ProxyOptions $options = null)
     {
         if (!$options) {
-            $options = new new ProxyOptions();
+            $options = new ProxyOptions();
         }
         $this->options = $options;
     }
