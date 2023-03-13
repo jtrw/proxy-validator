@@ -6,6 +6,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Jtrw\ProxyValidator\Exception\ProxyParamException;
+use Psr\Http\Message\ResponseInterface;
 
 class ProxyValidator
 {
@@ -45,21 +46,8 @@ class ProxyValidator
             return new ProxyResponse(false, ErrorDto::fromArray($errors));
         }
         
-        $proxyStr = sprintf(
-            "%s://%s:%s@%s:%s",
-            $proxyDto->getType(),
-            $proxyDto->getLogin(),
-            $proxyDto->getPass(),
-            $proxyDto->getHost(),
-            $proxyDto->getPort()
-        );
-        
         try {
-            $httpResponse = $this->httpClient->request("GET", $this->options->getOption(ProxyOptions::OPTIONS_KEY_TEST_HOST), [
-                "proxy" => $proxyStr,
-                'timeout' => $this->options->getOption(ProxyOptions::OPTIONS_KEY_TIMEOUT), // Response timeout
-                'connect_timeout' => $this->options->getOption(ProxyOptions::OPTIONS_CONNECT_KEY_TIMEOUT), // Connection timeout
-            ]);
+            $httpResponse = $this->request($proxyDto);
         } catch (ClientException $exp) {
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_MESSAGE] = $exp->getMessage();
@@ -80,5 +68,37 @@ class ProxyValidator
         }
     
         return new ProxyResponse(true);
+    }
+    
+    /**
+     * @param ProxyDto $proxyDto
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    private function request(ProxyDto $proxyDto): ResponseInterface
+    {
+        $proxyStr = $this->getProxyStr($proxyDto);
+        
+        return $this->httpClient->request("GET", $this->options->getOption(ProxyOptions::OPTIONS_KEY_TEST_HOST), [
+            "proxy" => $proxyStr,
+            'timeout' => $this->options->getOption(ProxyOptions::OPTIONS_KEY_TIMEOUT), // Response timeout
+            'connect_timeout' => $this->options->getOption(ProxyOptions::OPTIONS_CONNECT_KEY_TIMEOUT), // Connection timeout
+        ]);
+    }
+    
+    /**
+     * @param ProxyDto $proxyDto
+     * @return string
+     */
+    private function getProxyStr(ProxyDto $proxyDto): string
+    {
+        return sprintf(
+            "%s://%s:%s@%s:%s",
+            $proxyDto->getType(),
+            $proxyDto->getLogin(),
+            $proxyDto->getPass(),
+            $proxyDto->getHost(),
+            $proxyDto->getPort()
+        );
     }
 }
