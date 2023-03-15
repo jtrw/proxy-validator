@@ -38,8 +38,7 @@ class ProxyValidator
     {
         $errors = [];
         try {
-            $formatter = new ProxyFormatter($proxy);
-            $proxyDto = $formatter->format();
+            $proxyDto = $this->getProxyDto($proxy);
         } catch (ProxyParamException $exp) {
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_MESSAGE] = $exp->getMessage();
@@ -68,6 +67,17 @@ class ProxyValidator
         }
     
         return new ProxyResponse(true);
+    }
+    
+    /**
+     * @param string $proxy
+     * @return ProxyDto
+     * @throws ProxyParamException
+     */
+    private function getProxyDto(string $proxy): ProxyDto
+    {
+        $formatter = new ProxyFormatter($proxy);
+        return $formatter->format();
     }
     
     /**
