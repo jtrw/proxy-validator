@@ -1,6 +1,6 @@
 <?php
 
-namespace Jtrw\ProxyValidator;
+namespace Jtrw\ProxyValidator\Dto;
 
 class ProxyDto
 {

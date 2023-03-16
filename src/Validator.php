@@ -5,6 +5,8 @@ namespace Jtrw\ProxyValidator;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Jtrw\ProxyValidator\Dto\ErrorDto;
+use Jtrw\ProxyValidator\Dto\ProxyDto;
 use Jtrw\ProxyValidator\Exception\ProxyParamException;
 use Psr\Http\Message\ResponseInterface;
 

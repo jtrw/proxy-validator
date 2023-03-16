@@ -1,6 +1,8 @@
 <?php
 
-namespace Jtrw\ProxyValidator;
+namespace Jtrw\ProxyValidator\Dto;
+
+use Jtrw\ProxyValidator\Validator;
 
 class ErrorDto
 {
@@ -23,7 +25,7 @@ class ErrorDto
         return $this->statusCode;
     }
     
-    public static function fromArray(array $fields): static
+    public static function fromArray(array $fields): self
     {
         $dto = new self();
         
@@ -34,6 +36,9 @@ class ErrorDto
         return $dto;
     }
     
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         return [
@@ -42,6 +47,4 @@ class ErrorDto
             Validator::KEY_STATUS_CODE => $this->statusCode
         ];
     }
-    
-    
 }
