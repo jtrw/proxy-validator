@@ -8,7 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Jtrw\ProxyValidator\Exception\ProxyParamException;
 use Psr\Http\Message\ResponseInterface;
 
-class ProxyValidator
+class Validator
 {
     private const SUCCESS_STATUS_CODE = 200;
     
