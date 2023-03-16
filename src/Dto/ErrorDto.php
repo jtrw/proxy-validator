@@ -27,9 +27,9 @@ class ErrorDto
     {
         $dto = new self();
         
-        $dto->proxyName = $fields[ProxyValidator::KEY_PROXY_STR] ?? "";
-        $dto->message = $fields[ProxyValidator::KEY_MESSAGE] ?? "";
-        $dto->statusCode = $fields[ProxyValidator::KEY_STATUS_CODE] ?? "";
+        $dto->proxyName = $fields[Validator::KEY_PROXY_STR] ?? "";
+        $dto->message = $fields[Validator::KEY_MESSAGE] ?? "";
+        $dto->statusCode = $fields[Validator::KEY_STATUS_CODE] ?? "";
         
         return $dto;
     }
@@ -37,9 +37,9 @@ class ErrorDto
     public function toArray(): array
     {
         return [
-            ProxyValidator::KEY_PROXY_STR => $this->proxyName,
-            ProxyValidator::KEY_MESSAGE => $this->message,
-            ProxyValidator::KEY_STATUS_CODE => $this->statusCode
+            Validator::KEY_PROXY_STR   => $this->proxyName,
+            Validator::KEY_MESSAGE     => $this->message,
+            Validator::KEY_STATUS_CODE => $this->statusCode
         ];
     }
     
