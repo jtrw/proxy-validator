@@ -2,6 +2,8 @@
 
 namespace Jtrw\ProxyValidator;
 
+use Jtrw\ProxyValidator\Dto\ErrorDto;
+
 class ProxyResponse
 {
     private bool $isValid;
