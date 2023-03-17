@@ -28,7 +28,11 @@ class Validator
         $this->setOptions($options);
     }
     
-    private function setOptions(ProxyOptions $options = null)
+    /**
+     * @param ProxyOptions|null $options
+     * @return void
+     */
+    private function setOptions(ProxyOptions $options = null): void
     {
         if (!$options) {
             $options = new ProxyOptions();
@@ -36,6 +40,10 @@ class Validator
         $this->options = $options;
     }
     
+    /**
+     * @param string $proxy
+     * @return ProxyResponse
+     */
     public function validate(string $proxy): ProxyResponse
     {
         $errors = [];
@@ -44,6 +52,7 @@ class Validator
         } catch (ProxyParamException $exp) {
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_MESSAGE] = $exp->getMessage();
+            
             return new ProxyResponse(false, ErrorDto::fromArray($errors));
         }
         
@@ -53,10 +62,12 @@ class Validator
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_MESSAGE] = $exp->getMessage();
             $errors[static::KEY_STATUS_CODE] = $exp->getResponse()->getStatusCode();
+            
             return new ProxyResponse(false, ErrorDto::fromArray($errors));
         } catch (GuzzleException $exp) {
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_MESSAGE] = $exp->getMessage();
+            
             return new ProxyResponse(false, ErrorDto::fromArray($errors));
         }
         
@@ -65,6 +76,7 @@ class Validator
         if ($httpResponse->getStatusCode() !== static::SUCCESS_STATUS_CODE) {
             $errors[static::KEY_PROXY_STR] = $proxy;
             $errors[static::KEY_STATUS_CODE] = $statusCode;
+            
             return new ProxyResponse(false, ErrorDto::fromArray($errors));
         }
     
