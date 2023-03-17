@@ -12,17 +12,27 @@ class ProxyOptions
     private const TIMEOUT_DEFAULT_VALUE         = 3;
     private const CONNECT_TIMEOUT_DEFAULT_VALUE = 3;
     
+    private array $options;
+    
     public function __construct(array $options = [])
     {
         $this->setOptions($options);
     }
     
-    private function setOptions(array $options = [])
+    /**
+     * @param array $options
+     * @return void
+     */
+    private function setOptions(array $options = []): void
     {
         $this->options = $options;
         $this->setDefaultOptions();
     }
     
+    /**
+     * @param string $key
+     * @return mixed|void
+     */
     public function getOption(string $key)
     {
         if (array_key_exists($key, $this->options)) {
@@ -30,7 +40,10 @@ class ProxyOptions
         }
     }
     
-    private function setDefaultOptions()
+    /**
+     * @return void
+     */
+    private function setDefaultOptions(): void
     {
         if (!isset($this->options[static::OPTIONS_KEY_TIMEOUT])) {
             $this->options[static::OPTIONS_KEY_TIMEOUT] = static::TIMEOUT_DEFAULT_VALUE;

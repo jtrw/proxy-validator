@@ -17,11 +17,19 @@ class ProxyFormatter
     
     private string $proxy;
     
+    /**
+     * @param string $proxy
+     */
     public function __construct(string $proxy)
     {
         $this->proxy = $proxy;
     }
     
+    /**
+     * @param string|null $format
+     * @return ProxyDto
+     * @throws ProxyParamException
+     */
     public function format(string $format = null): ProxyDto
     {
         if (!$format) {
