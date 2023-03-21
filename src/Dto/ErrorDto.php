@@ -25,7 +25,7 @@ class ErrorDto
         return $this->statusCode;
     }
     
-    public static function fromArray(array $fields): self
+    public static function fromArray(array $fields): static
     {
         $dto = new self();
         
