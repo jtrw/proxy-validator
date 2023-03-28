@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="2" assertions="5" errors="0" failures="0" skipped="0" time="0.288430">
+    <testsuite name=":vendor Test Suite" tests="2" assertions="5" errors="0" failures="0" skipped="0" time="0.288430">
+      <testsuite name="Jtrw\ProxyValidator\Tests\ValidatorTest" file="/app/tests/ValidatorTest.php" tests="2" assertions="5" errors="0" failures="0" skipped="0" time="0.288430">
+        <testcase name="testFailedProxy" file="/app/tests/ValidatorTest.php" line="11" class="Jtrw\ProxyValidator\Tests\ValidatorTest" classname="Jtrw.ProxyValidator.Tests.ValidatorTest" assertions="3" time="0.282608"/>
+        <testcase name="testNotValidProxyStr" file="/app/tests/ValidatorTest.php" line="25" class="Jtrw\ProxyValidator\Tests\ValidatorTest" classname="Jtrw.ProxyValidator.Tests.ValidatorTest" assertions="2" time="0.005822"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
