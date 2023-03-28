@@ -10,7 +10,11 @@
 [![License](http://poser.pugx.org/jtrw/simple-telegram-message/license)](https://packagist.org/packages/jtrw/proxy-validator)
 [![PHP Version Require](http://poser.pugx.org/jtrw/proxy-validator/require/php)](https://packagist.org/packages/jtrw/proxy-validator)
 
-Example:
+## Install
+
+`composer require jtrw/proxy-validator`
+
+### Example:
 
 ```php
 use Jtrw\ProxyValidator\ProxyValidator;
