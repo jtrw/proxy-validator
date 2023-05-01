@@ -7,7 +7,7 @@ use Jtrw\ProxyValidator\Dto\ErrorDto;
 class ProxyResponse
 {
     private bool $isValid;
-    private ?ErrorDto $errors = null;
+    private ?ErrorDto $errors;
     
     /**
      * @param bool $isValid

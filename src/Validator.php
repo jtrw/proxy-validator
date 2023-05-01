@@ -104,9 +104,9 @@ class Validator
         $proxyStr = $this->getProxyStr($proxyDto);
         
         return $this->httpClient->request("GET", $this->options->getOption(ProxyOptions::OPTIONS_KEY_TEST_HOST), [
-            "proxy" => $proxyStr,
-            'timeout' => $this->options->getOption(ProxyOptions::OPTIONS_KEY_TIMEOUT), // Response timeout
-            'connect_timeout' => $this->options->getOption(ProxyOptions::OPTIONS_CONNECT_KEY_TIMEOUT), // Connection timeout
+            "proxy"           => $proxyStr,
+            'timeout'         => $this->options->getOption(ProxyOptions::OPTIONS_KEY_TIMEOUT),
+            'connect_timeout' => $this->options->getOption(ProxyOptions::OPTIONS_CONNECT_KEY_TIMEOUT),
         ]);
     }
     
