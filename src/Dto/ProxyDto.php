@@ -18,6 +18,7 @@ class ProxyDto
         string $type
     )
     {
+        
         $this->host = $host;
         $this->port = $port;
         $this->login = $login;
