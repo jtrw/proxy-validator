@@ -36,7 +36,7 @@ class ProxyFormatter
             $proxyData = explode(static::SEPARATOR, $this->proxy);
         }
     
-        $host = $proxyData[self::HOST_INDEX] ?? throw new ProxyParamException("Host Not Found"); //New comment for check code style comment long
+        $host = $proxyData[self::HOST_INDEX] ?? throw new ProxyParamException("Host Not Found"); //New comment for check code style comment too long
         $port = $proxyData[self::PORT_INDEX] ?? throw new ProxyParamException("Port Not Found");
         $login = $proxyData[self::LOGIN_INDEX] ?? throw new ProxyParamException("Login Not Found");
         $pass = $proxyData[self::PASS_INDEX] ?? throw new ProxyParamException("Pass Not Found");
