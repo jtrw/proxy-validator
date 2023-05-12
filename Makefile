@@ -37,7 +37,6 @@ stop-all: stop stop-services ## stop full project environment
 php-shell: ## PHP shell
 	docker-compose run --rm php-fpm sh -l
 
-
 .PHONY: check-style
 check-style: ## Check style
 	docker-compose run --rm --no-deps php-fpm sh -lc './vendor/bin/phpcs --standard=.rule/ruleset.xml src/*'
